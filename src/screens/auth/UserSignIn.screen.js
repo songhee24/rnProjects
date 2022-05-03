@@ -1,10 +1,13 @@
 import React from 'react'
-import { Text, View } from 'react-native'
+import { View } from 'react-native'
+import { AppText } from '../../components/UI/AppText'
 
 export const UserSignInScreen = () => {
   return (
     <View>
-      <Text>Please Register !</Text>
+      <AppText size={20} fontFamily="medium">
+        Введите номер телефона
+      </AppText>
     </View>
   )
 }

@@ -1,20 +1,31 @@
 import React from 'react'
-import { Text } from 'react-native'
+import { Text, StyleSheet } from 'react-native'
+import { ViewPropTypes } from 'deprecated-react-native-prop-types'
 import { PropTypes } from 'prop-types'
 import { THEME_FONTS } from '../../utils/theme'
 
-export const AppText = ({ fontFamily, size, color }) => {
+export const AppText = ({ fontFamily, size, color, style, ...otherProps }) => {
   const fontFamilyStyle = React.useMemo(() => {
     if (fontFamily === 'medium') {
       return { fontFamily: THEME_FONTS.fontFamilyMedium }
     }
+    if (fontFamily === 'light') {
+      return { fontFamily: THEME_FONTS.fontFamilyLight }
+    }
 
-    return { fontFamily: THEME_FONTS.fontFamilyRegular }
+    return { fontFamily: THEME_FONTS.fontFamilyThin }
   }, [fontFamily])
 
   const fontSizeStyle = React.useMemo(() => ({ fontSize: size }), [size])
 
-  return <Text style={[styles.root, fontFamilyStyle, fontSizeStyle]} />
+  console.log(fontFamilyStyle)
+
+  return (
+    <Text
+      {...otherProps}
+      style={[styles.root, fontFamilyStyle, fontSizeStyle, { color }, style]}
+    />
+  )
 }
 
 const styles = StyleSheet.create({
@@ -25,8 +36,14 @@ const styles = StyleSheet.create({
   },
 })
 
+AppText.defaultProps = {
+  color: '#020202',
+  style: {},
+}
+
 AppText.propTypes = {
-  fontFamily: PropTypes.oneOf(['medium, light']).isRequired,
+  fontFamily: PropTypes.oneOf(['medium', 'light']).isRequired,
   size: PropTypes.oneOf([10, 12, 14, 16, 18, 20]).isRequired,
-  color: PropTypes.string.isRequired,
+  color: PropTypes.string,
+  style: ViewPropTypes.style,
 }

@@ -5,12 +5,16 @@ import { UserSignInScreen } from './screens/auth/UserSignIn.screen'
 
 const App: () => Node = () => {
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.screen}>
       <UserSignInScreen />
     </SafeAreaView>
   )
 }
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  screen: {
+    backgroundColor: '#FFFFFF',
+  },
+})
 
 export default App
