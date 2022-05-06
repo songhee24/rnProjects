@@ -1,7 +1,8 @@
 import React from 'react'
 import { Text, StyleSheet } from 'react-native'
 import { PropTypes } from 'prop-types'
-import { THEME_FONTS } from '../../utils/theme'
+import { THEME, THEME_FONTS } from '../../utils/constants/theme'
+import { getPlatformOS } from '../../utils/helpers/general'
 
 export const AppText = ({ fontFamily, size, color, style, ...otherProps }) => {
   const fontFamilyStyle = React.useMemo(() => {
@@ -30,7 +31,7 @@ const styles = StyleSheet.create({
 })
 
 AppText.defaultProps = {
-  color: '#020202',
+  color: THEME[getPlatformOS()].COLORS.dark.main,
   style: {},
 }
 
